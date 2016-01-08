@@ -33,6 +33,23 @@ def chopLoop(searchVal,passedArray):
     else:
       start = midpoint + 1
   return -1
+  
+def chopRecursion(searchVal,passedArray, start=0,end=-2):
+  if end == -2:   # optional argument not provided
+    end = len(passedArray)
+  if (end-start) == 0:
+    return -1
+  midpoint = ((end - start) // 2)+start
+  if searchVal == passedArray[midpoint]:
+    return midpoint
+  elif searchVal < passedArray[midpoint]:
+    return chopRecursion(searchVal,passedArray,start,midpoint)
+  else:
+    return chopRecursion(searchVal,passedArray,midpoint + 1,end)
+  return -1
 	
 test_chop(chopLoop)
-print("passed")
+print("chopLoop passed")
+test_chop(chopRecursion)
+print("chopRecursion passed")
+#   print("start: "+str(start)+" end: "+str(end)+" midpoint: "+str(midpoint))
